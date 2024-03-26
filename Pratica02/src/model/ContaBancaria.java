@@ -1,73 +1,88 @@
 package model;
 
-import java.sql.Date;
 import java.util.ArrayList;
+
+import visualizacao.entradaSaida;
 
 public class ContaBancaria {
 	private String titularDaConta;
 	private int tipo;
-	private static double saldo;
-	private static double deposito;
-	private static double saque;
-	public static Date data;
-	private static ArrayList<Double> listaDepositos = new ArrayList<Double>();
-	private static ArrayList<Double> listaSaques = new ArrayList<Double>();
-	private static ArrayList<Double> totalMovimentacoes = new ArrayList<Double>();
+	private double saldo;
+	private ArrayList<Movimentacao> listaDeMovimentacao = new ArrayList<Movimentacao>();
+	private ArrayList<Movimentacao> listaDeDepositos = new ArrayList<Movimentacao>();
+	private ArrayList<Movimentacao> listaDeSaques = new ArrayList<Movimentacao>();
+
 	
+	public ArrayList<Movimentacao> getListaDeDepositos() {
+		return listaDeDepositos;
+	}
+
+	public void setListaDeDepositos(ArrayList<Movimentacao> listaDeDepositos) {
+		this.listaDeDepositos = listaDeDepositos;
+	}
+
+	public ArrayList<Movimentacao> getListaDeSaques() {
+		return listaDeSaques;
+	}
+
+	public void setListaDeSaques(ArrayList<Movimentacao> listaDeSaques) {
+		this.listaDeSaques = listaDeSaques;
+	}
+
+	public ArrayList<Movimentacao> getListaDeMovimentacao() {
+		return listaDeMovimentacao;
+	}
+
+	public void setListaDeMovimentacao(ArrayList<Movimentacao> listaDeMovimentacao) {
+		this.listaDeMovimentacao = listaDeMovimentacao;
+	}
 	
 	public String getTitularDaConta() {
 		return titularDaConta;
 	}
+
 	public void setTitularDaConta(String titularDaConta) {
 		this.titularDaConta = titularDaConta;
 	}
+
 	public int getTipo() {
 		return tipo;
 	}
-	public void setTipo(int tipo) {
-		this.tipo = tipo;
+
+	public void setTipo(int i) {
+		this.tipo = i;
 	}
-	public static double getSaldo() {
+
+	public double getSaldo() {
 		return saldo;
 	}
-	public static void setSaldo(double saldo) {
-		ContaBancaria.saldo = saldo;
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
 	}
-	public static double getDeposito() {
-		return deposito;
+
+	public void gerarExtrato() {
+
 	}
-	public String setDeposito(double valor) {
-		ContaBancaria.deposito = valor;
-		return titularDaConta;
+
+	public void gerarExtratoDepositos() {
+
 	}
-	public static double getSaque() {
-		return saque;
+
+	public void gerarExtratoSaques() {
+
 	}
-	public static void setSaque(double saque) {
-		ContaBancaria.saque = saque;
+
+	public double depositar(double deposito) {
+		return this.saldo = this.saldo + deposito;
 	}
-	public static Date getData() {
-		return data;
-	}
-	public static void setData(Date data) {
-		ContaBancaria.data = data;
-	}
-	public static ArrayList<Double> getListaDepositos() {
-		return listaDepositos;
-	}
-	public static void setListaDepositos(ArrayList<Double> listaDepositos) {
-		ContaBancaria.listaDepositos = listaDepositos;
-	}
-	public static ArrayList<Double> getListaSaques() {
-		return listaSaques;
-	}
-	public static void setListaSaques(ArrayList<Double> listaSaques) {
-		ContaBancaria.listaSaques = listaSaques;
-	}
-	public static ArrayList<Double> getTotalMovimentacoes() {
-		return totalMovimentacoes;
-	}
-	public static void setTotalMovimentacoes(ArrayList<Double> totalMovimentacoes) {
-		ContaBancaria.totalMovimentacoes = totalMovimentacoes;
+
+	public double saque(double saque) {
+		if (saque > this.saldo) {
+			entradaSaida.exibeErroSaldoInsuficiente(this.saldo);
+		} else {
+			return this.saldo = this.saldo - saque;
+		}
+		return this.saldo;
 	}
 }

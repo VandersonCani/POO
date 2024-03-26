@@ -1,24 +1,28 @@
 package controle;
 
+import java.util.ArrayList;
+
 import model.ContaBancaria;
-import model.Movimentacao;
 import visualizacao.entradaSaida;
 
 public class Controladora {
 	public void exibeMenu() {
 		int opcoes;
 		boolean encerrarSessao = false;
-
+		ArrayList<ContaBancaria> listaDeConta = new ArrayList<ContaBancaria>();
+		
 		ContaBancaria contabancaria = new ContaBancaria();
-
-		opcoes = entradaSaida.apresentaMenu();
+		
+		
 
 		do {
+			opcoes = entradaSaida.apresentaMenu();
 			switch (opcoes) {
 
 			case 0:
 				contabancaria.setTitularDaConta(entradaSaida.solicitaNomeTitular());
 				contabancaria.setTipo(entradaSaida.solicitaTipoDaContaDesejada());
+				listaDeConta.add(contabancaria);
 				break;
 
 			case 1:
@@ -26,36 +30,34 @@ public class Controladora {
 				break;
 
 			case 2:
-				double deposito = entradaSaida.solicitarInformacoesDeposito();
-				Movimentacao movimentacao = new Movimentacao();
-				
-				movimentacao.setMovimentacao(contabancaria.setDeposito(deposito));
-				
-				
-							
+				System.out.println(contabancaria.getSaldo());
+				contabancaria.depositar(entradaSaida.solicitarInformacoesDeposito());
+				System.out.println(contabancaria.getSaldo());
 				break;
 
 			case 3:
+				System.out.println(contabancaria.getSaldo());
+				contabancaria.saque(entradaSaida.solicitarInformacoesSaque());
+				System.out.println(contabancaria.getSaldo());
 				break;
 
 			case 4:
 				opcoes = entradaSaida.apresentaMenuExtrato();
 				switch (opcoes) {
-				
+
 				case 0:
 					entradaSaida.exibirExtratoCompleto();
-				break;
-				
+					break;
+
 				case 1:
 					entradaSaida.exibirExtratoDeDepositos();
-				break;
-				
+					break;
+
 				case 2:
 					entradaSaida.exibirExtratoDeSaques();
-				break;
+					break;
 				}
 			}
-			opcoes = entradaSaida.apresentaMenu();
 		} while (encerrarSessao != true);
 	}
 }

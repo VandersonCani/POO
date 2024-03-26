@@ -34,7 +34,7 @@ public class entradaSaida {
 		return deposito;
 	}
 
-	public static double solicitarInformacoesSaque(ContaBancaria contabancaria) {
+	public static double solicitarInformacoesSaque() {
 		Double saque = Double.parseDouble(JOptionPane.showInputDialog("Saque: EX(10.00)"));
 		return saque;
 	}
@@ -73,8 +73,9 @@ public class entradaSaida {
 
 	public static void exibeDados(ContaBancaria contabancaria) {
 		String txt = "";
+		String titular = contabancaria.getTitularDaConta();
 
-		txt += "Nome: " + contabancaria.getTitularDaConta() + "\n";
+		txt += "Nome: " + titular + "\n";
 
 		if (contabancaria.getTipo() == 1) {
 			txt += "Conta Corrente \n";
