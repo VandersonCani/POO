@@ -21,7 +21,7 @@ public class Controladora {
 
 			case 0:
 				contabancaria.setTitularDaConta(entradaSaida.solicitaNomeTitular());
-				contabancaria.setTipo(entradaSaida.solicitaTipoDaContaDesejada());
+				contabancaria.setTipoCo(entradaSaida.solicitaTipoDaContaDesejada());
 				listaDeConta.add(contabancaria);
 				break;
 
@@ -30,31 +30,31 @@ public class Controladora {
 				break;
 
 			case 2:
-				System.out.println(contabancaria.getSaldo());
 				contabancaria.depositar(entradaSaida.solicitarInformacoesDeposito());
-				System.out.println(contabancaria.getSaldo());
 				break;
 
 			case 3:
-				System.out.println(contabancaria.getSaldo());
 				contabancaria.saque(entradaSaida.solicitarInformacoesSaque());
-				System.out.println(contabancaria.getSaldo());
 				break;
 
 			case 4:
 				opcoes = entradaSaida.apresentaMenuExtrato();
+				String txt;
 				switch (opcoes) {
-
+				
 				case 0:
-					entradaSaida.exibirExtratoCompleto();
+					txt = ContaBancaria.exibirExtratoCompleto();
+					System.out.println(txt);
 					break;
 
 				case 1:
-					entradaSaida.exibirExtratoDeDepositos();
+					txt = ContaBancaria.exibirExtratoDeDepositos();
+					System.out.println(txt);					
 					break;
 
 				case 2:
-					entradaSaida.exibirExtratoDeSaques();
+					txt = ContaBancaria.exibirExtratoDeSaques();
+					System.out.println(txt);
 					break;
 				}
 			}
