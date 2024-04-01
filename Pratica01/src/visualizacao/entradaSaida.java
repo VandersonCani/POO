@@ -20,7 +20,7 @@ public class entradaSaida {
 	}
 
 	public static int apresentaMenu() {
-		String opcoes[] = { "Fabricar Carro", "Vender Carro", "Encerrar Programa" };
+		String opcoes[] = { "Fabricar Carro", "Vender Carro", "Lista Carros Fabricados", "Encerrar Programa" };
 		JComboBox<String> menu = new JComboBox<String>(opcoes);
 		JOptionPane.showConfirmDialog(null, menu, "Selecione a Opção Desejada", JOptionPane.OK_CANCEL_OPTION);
 
