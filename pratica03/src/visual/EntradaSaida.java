@@ -36,4 +36,10 @@ public class EntradaSaida {
 		return preco;
 	}
 
+	public static int solicitaQualProdutoRemover() {
+			int codigoProduto = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do produto que deseja Remover: "));
+			
+			return codigoProduto;
+	}
+
 }

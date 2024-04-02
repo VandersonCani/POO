@@ -34,7 +34,7 @@ public class Controladora {
 				break;
 
 			case 2: // Remove Produtos
-				
+				EntradaSaida.solicitaQualProdutoRemover();
 				break;
 
 			case 3: // Encerra Programa
