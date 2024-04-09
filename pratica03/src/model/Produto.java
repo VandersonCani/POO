@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
 
 import visual.EntradaSaida;
 
@@ -10,6 +13,25 @@ public class Produto {
 	String descricao = "";
 	double preco = 0.0;
 	int quantidade = 0;
+	int quantidadeVendido = 0;
+	double valorTotalVendido = 0.0;
+	Date data;
+
+	public double getValorTotalVendido() {
+		return valorTotalVendido;
+	}
+
+	public void setValorTotalVendido(double valorTotal) {
+		this.valorTotalVendido = valorTotal;
+	}
+
+	public int getQuantidadeVendido() {
+		return quantidadeVendido;
+	}
+
+	public void setQuantidadeVendido(int quantidadeVendido) {
+		this.quantidadeVendido = quantidadeVendido;
+	}
 
 	public int getQuantidade() {
 		return quantidade;
@@ -83,5 +105,17 @@ public class Produto {
 				listaDeProdutos.remove(i);
 			}
 		}
+	}
+
+	public void listaVendas(ArrayList<Produto> listaDeVendas) {
+		String txt = "";
+		for (int i = 0; i < listaDeVendas.size(); i++) {
+			Produto vendas = listaDeVendas.get(i);
+
+			txt = "Produto " + (i + 1) + "\nCódigo: " + vendas.getCodigoProduto() + "\nNome Produto: "
+					+ vendas.getNomeProduto() + "\nDescrição Produto: " + vendas.getDescricao() + "\nPreço: "
+					+ vendas.getPreco() + "\nQuantidade: " + vendas.getQuantidade();
+		}
+		JOptionPane.showMessageDialog(null, txt);
 	}
 }

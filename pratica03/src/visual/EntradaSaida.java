@@ -3,6 +3,8 @@ package visual;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
+import model.Produto;
+
 public class EntradaSaida {
 
 	public static int chamadaMenu() {
@@ -72,9 +74,30 @@ public class EntradaSaida {
 	}
 
 	public static void exibeErroExclusaoComProdutosEmEstoque() {
+
+		JOptionPane.showMessageDialog(null, "Você Está Tentando Excluir um Produto com Quantidade em Estoque. \n");
+
+	}
+
+	public static boolean confirmaPagamento(int quantidadeVenda, Produto produtos) {
+		String opcoes1[] = { "SIM", "NÃO" };
+		int retorno = 0;
+		boolean confirma = false;
 		
-		JOptionPane.showMessageDialog(null,
-				"Você Está Tentando Excluir um Produto com Quantidade em Estoque. \n");
+		double valorTotal = quantidadeVenda * produtos.getPreco();
+
+		retorno = JOptionPane.showOptionDialog(null,
+				"Valor Total a Receber: " + valorTotal + "\n\nConfirma Pagamento?", null, retorno, retorno, null,
+				opcoes1, opcoes1);
 		
+		System.out.println(retorno);
+
+		if (retorno == 0) {
+			confirma = true;
+		} else {
+			confirma = false;
+		}
+
+		return confirma;
 	}
 }

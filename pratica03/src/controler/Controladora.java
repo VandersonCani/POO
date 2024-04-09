@@ -12,11 +12,12 @@ public class Controladora {
 	public void exibeMenu() {
 
 		ArrayList<Produto> listaDeProdutos = new ArrayList<>();
+		ArrayList<Produto> listaDeVendas = new ArrayList<>();
 		boolean validaMenu = false;
 		int opcoes = 0;
 
 		String tipo = " Receber";
-		boolean venda = true;
+		boolean validaVenda = true;
 		int codigo = 0;
 
 		do {
@@ -38,7 +39,7 @@ public class Controladora {
 
 				case 1: // Receber Produtos
 					tipo = " Receber";
-					venda = false;
+					validaVenda = false;
 
 					codigo = Integer.parseInt(JOptionPane.showInputDialog(Produto.listaProdutos(listaDeProdutos)
 							+ "\n\nDigite o Código do Produto que deseja Receber: \n"));
@@ -48,7 +49,7 @@ public class Controladora {
 						if (produtos.getCodigoProduto() == codigo) {
 
 							int quantidade = produtos.getQuantidade();
-							quantidade += EntradaSaida.solicitaQuantidade(quantidade, venda, tipo);
+							quantidade += EntradaSaida.solicitaQuantidade(quantidade, validaVenda, tipo);
 							produtos.setQuantidade(quantidade);
 						}
 					}
@@ -56,7 +57,7 @@ public class Controladora {
 
 				case 2: // Vender Produtos
 					tipo = " Vender";
-					venda = true;
+					validaVenda = true;
 
 					codigo = Integer.parseInt(JOptionPane.showInputDialog(Produto.listaProdutos(listaDeProdutos)
 							+ "\n\nDigite o Código do Produto que deseja Vender: \n"));
@@ -65,11 +66,32 @@ public class Controladora {
 						Produto produtos = listaDeProdutos.get(i);
 						if (produtos.getCodigoProduto() == codigo) {
 
-							int quantidade = produtos.getQuantidade();
-							quantidade -= EntradaSaida.solicitaQuantidade(quantidade, venda, tipo);
-							produtos.setQuantidade(quantidade);
+							int quantidadeEstoque = produtos.getQuantidade();
+							int quantidadeVenda = EntradaSaida.solicitaQuantidade(quantidadeEstoque, validaVenda, tipo);
+							boolean confirmaVenda = EntradaSaida.confirmaPagamento(quantidadeVenda, produtos);
+							
+							if (confirmaVenda == true) {
+								quantidadeEstoque -= quantidadeVenda;
+								produtos.setQuantidade(quantidadeEstoque);
+
+								Produto venda = new Produto();
+								venda.setCodigoProduto(codigo);
+								venda.setDescricao(produtos.getDescricao());
+								venda.setNomeProduto(produtos.getNomeProduto());
+								venda.setQuantidadeVendido(quantidadeVenda);
+								double valorVenda = (produtos.getPreco() * venda.getQuantidadeVendido()); 
+								venda.setValorTotalVendido(valorVenda);
+
+								listaDeVendas.add(venda);
+							} else {
+								JOptionPane.showMessageDialog(null, "Pagamento Não Confirmado, Tente Novamente! \n");
+							}
+						
+						produtos.listaVendas(listaDeVendas);
+						
 						}
 					}
+					
 					break;
 				}
 				break;
