@@ -83,10 +83,10 @@ public class Produto {
 
 			if (produtos.getNomeProduto() == "" || produtos.getNomeProduto() == null) {
 				validaMsg = false;
-			} else {
+			} else if (produtos.getNomeProduto() != "" || produtos.getNomeProduto() != null) {
 				txt += "Produto " + (i + 1) + "\nCódigo: " + produtos.getCodigoProduto() + "\nNome Produto: "
 						+ produtos.getNomeProduto() + "\nDescrição Produto: " + produtos.getDescricao() + "\nPreço: "
-						+ produtos.getPreco() + "\nQuantidade: " + produtos.getQuantidade();
+						+ produtos.getPreco() + "\nQuantidade: " + produtos.getQuantidade() + "\n\n";
 				validaMsg = true;
 			}
 		}
@@ -112,9 +112,9 @@ public class Produto {
 		for (int i = 0; i < listaDeVendas.size(); i++) {
 			Produto vendas = listaDeVendas.get(i);
 
-			txt = "Produto " + (i + 1) + "\nCódigo: " + vendas.getCodigoProduto() + "\nNome Produto: "
+			txt = "Venda " + (i + 1) + "\nCódigo: " + vendas.getCodigoProduto() + "\nNome Produto: "
 					+ vendas.getNomeProduto() + "\nDescrição Produto: " + vendas.getDescricao() + "\nPreço: "
-					+ vendas.getPreco() + "\nQuantidade: " + vendas.getQuantidade();
+					+ vendas.getValorTotalVendido() + "\nQuantidade: " + vendas.getQuantidadeVendido() + "\n\n";
 		}
 		JOptionPane.showMessageDialog(null, txt);
 	}

@@ -83,13 +83,12 @@ public class EntradaSaida {
 		String opcoes1[] = { "SIM", "NÃO" };
 		int retorno = 0;
 		boolean confirma = false;
-		
+
 		double valorTotal = quantidadeVenda * produtos.getPreco();
 
-		retorno = JOptionPane.showOptionDialog(null,
-				"Valor Total a Receber: " + valorTotal + "\n\nConfirma Pagamento?", null, retorno, retorno, null,
-				opcoes1, opcoes1);
-		
+		retorno = JOptionPane.showOptionDialog(null, "Valor Total a Receber: " + valorTotal + "\n\nConfirma Pagamento?",
+				null, retorno, retorno, null, opcoes1, opcoes1);
+
 		System.out.println(retorno);
 
 		if (retorno == 0) {
@@ -100,4 +99,9 @@ public class EntradaSaida {
 
 		return confirma;
 	}
+
+	public static void exibeLista(String txt) {
+		JOptionPane.showMessageDialog(null, txt);
+	}
+
 }

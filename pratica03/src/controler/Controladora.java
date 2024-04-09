@@ -42,7 +42,7 @@ public class Controladora {
 					validaVenda = false;
 
 					codigo = Integer.parseInt(JOptionPane.showInputDialog(Produto.listaProdutos(listaDeProdutos)
-							+ "\n\nDigite o Código do Produto que deseja Receber: \n"));
+							+ "Digite o Código do Produto que deseja Receber: \n"));
 
 					for (int i = 0; i < listaDeProdutos.size(); i++) {
 						Produto produtos = listaDeProdutos.get(i);
@@ -60,7 +60,7 @@ public class Controladora {
 					validaVenda = true;
 
 					codigo = Integer.parseInt(JOptionPane.showInputDialog(Produto.listaProdutos(listaDeProdutos)
-							+ "\n\nDigite o Código do Produto que deseja Vender: \n"));
+							+ "Digite o Código do Produto que deseja Vender: \n"));
 
 					for (int i = 0; i < listaDeProdutos.size(); i++) {
 						Produto produtos = listaDeProdutos.get(i);
@@ -69,7 +69,8 @@ public class Controladora {
 							int quantidadeEstoque = produtos.getQuantidade();
 							int quantidadeVenda = EntradaSaida.solicitaQuantidade(quantidadeEstoque, validaVenda, tipo);
 							boolean confirmaVenda = EntradaSaida.confirmaPagamento(quantidadeVenda, produtos);
-							
+							double valorVenda = 0.0;
+
 							if (confirmaVenda == true) {
 								quantidadeEstoque -= quantidadeVenda;
 								produtos.setQuantidade(quantidadeEstoque);
@@ -79,26 +80,26 @@ public class Controladora {
 								venda.setDescricao(produtos.getDescricao());
 								venda.setNomeProduto(produtos.getNomeProduto());
 								venda.setQuantidadeVendido(quantidadeVenda);
-								double valorVenda = (produtos.getPreco() * venda.getQuantidadeVendido()); 
+								valorVenda = (produtos.getPreco() * venda.getQuantidadeVendido());
 								venda.setValorTotalVendido(valorVenda);
-
 								listaDeVendas.add(venda);
+
+								produtos.listaVendas(listaDeVendas);
+
 							} else {
 								JOptionPane.showMessageDialog(null, "Pagamento Não Confirmado, Tente Novamente! \n");
 							}
-						
-						produtos.listaVendas(listaDeVendas);
-						
+
 						}
 					}
-					
+
 					break;
 				}
 				break;
 
 			case 1: // Listar Estoque
-				String txt = Produto.listaProdutos(listaDeProdutos);
-				JOptionPane.showMessageDialog(null, txt);
+				EntradaSaida.exibeLista(Produto.listaProdutos(listaDeProdutos));
+
 				break;
 
 			case 2: // Remove Produtos
