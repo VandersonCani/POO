@@ -1,9 +1,8 @@
 package view;
 
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 
-import model.Plantacao;
+import javax.swing.JOptionPane;
 
 public class viewMenus {
 
@@ -41,6 +40,7 @@ public class viewMenus {
 	}
 
 	public static String SolicitaProducaoAplicarVenda() {
+		
 		return null;
 	}
 

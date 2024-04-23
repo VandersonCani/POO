@@ -26,8 +26,19 @@ public class geralView {
 		return exibeTexto;
 	}
 
-	public static void selecionaProducaoAtualizar() {
+	public static int selecionaProducaoAtualizar(String exibeTexto) {
+		
+		int nroProducao = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero referente a produção a ser atualizada: " +  exibeTexto));
+		
+		return nroProducao;
 		
 		
+	}
+
+	public static int selecionaProducaoRemover(String exibeTexto) {
+		
+		int nroProducao = Integer.parseInt(JOptionPane.showInputDialog("Digite o numero referente a produção a ser Removida: " +  exibeTexto));
+		
+		return nroProducao;
 	}
 }
