@@ -41,4 +41,9 @@ public class geralView {
 		
 		return nroProducao;
 	}
+
+	public static void encerraPrograma() {
+		JOptionPane.showMessageDialog(null, "Obrigado por utilizar o UpStrawBerry! Volte Sempre!");
+		
+	}
 }

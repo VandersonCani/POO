@@ -1,9 +1,6 @@
 package controler;
 
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
 import model.Plantacao;
 import model.Producao;
 import view.geralView;
@@ -15,7 +12,7 @@ public class Controladora {
 	ArrayList<String> nomes = new ArrayList<>();
 	static ArrayList<Producao> listaProducao = new ArrayList<>();
 	static String exibeTexto;
-	
+
 	public void minhaPlantacao() {
 		boolean validaMenu = false;
 
@@ -32,8 +29,7 @@ public class Controladora {
 				plantacao.setEndereco(viewCadastroPlantacao.solicitaEndereco());
 				plantacao.setMetrosQuadrados(viewCadastroPlantacao.solicitaMetragem());
 				plantacao.setDataDeCadastro(viewCadastroPlantacao.solicitaData());
-				plantacao.setProducao(null);
-				plantacao.setInsumos(null);
+				plantacao.setListaProducao(null);
 				listaPlantacao.add(plantacao);
 				break;
 
@@ -41,6 +37,11 @@ public class Controladora {
 				String exibeTexto = listaDonosDasPlantacoes();
 				String plantacaoSelecionada = viewCadastroPlantacao.solicitaPlantacaoDesejada(exibeTexto);
 				validaPlantacao(plantacaoSelecionada);
+				break;
+
+			case 2:
+				validaMenu = true;
+				encerraPrograma();
 				break;
 
 			}
@@ -56,42 +57,51 @@ public class Controladora {
 			producao.setDataVenda(geralView.solicitaDataDaVenda());
 			producao.setCaixasColhidas(geralView.solicitaQtdCaixas());
 			producao.setValorRecebido(geralView.solicitaValorRecebido());
-			plantacao.setProducao(producao);
+			listaProducao.add(producao);
+			plantacao.setListaProducao(listaProducao);
+
 			break;
 
 		case 1: // Atualizar Produção
-			
+
 			exibeTexto = listaProducao();
 			int producaoAtualizar = geralView.selecionaProducaoAtualizar(exibeTexto);
-			
+
 			atualizarProducao(producaoAtualizar, posicaoPlantacao);
-			
+
 			break;
 
 		case 2: // Remover Produção
 			exibeTexto = listaProducao();
 			int producaoRemover = geralView.selecionaProducaoRemover(exibeTexto);
 			removerProducao(producaoRemover, producaoRemover);
-			
+
+			break;
+
+		case 3:
+			encerraPrograma();
 			break;
 
 		}
 	}
 
 	private static void removerProducao(int producaoRemover, int posicaoPlantacao) {
-		listaPlantacao.remove(producaoRemover - 1);
+	
+		listaProducao.remove(producaoRemover - 1);
 	}
 
 	private static void atualizarProducao(int producaoAtualizar, int posicaoPlantacao) {
-		
+
 		Plantacao plantacao = listaPlantacao.get(posicaoPlantacao);
-		for(int i = 0 ; i < listaProducao.size(); i++) {
-			if(i == producaoAtualizar - 1) {
+		for (int i = 0; i < listaProducao.size(); i++) {
+			if (i == (producaoAtualizar - 1)) {
 				Producao producao = listaProducao.get(i);
+
 				producao.setDataVenda(geralView.solicitaDataDaVenda());
 				producao.setCaixasColhidas(geralView.solicitaQtdCaixas());
 				producao.setValorRecebido(geralView.solicitaValorRecebido());
-				plantacao.setProducao(producao);
+				listaProducao.set(i, producao);
+				plantacao.setListaProducao(listaProducao);
 			}
 		}
 	}
@@ -100,10 +110,10 @@ public class Controladora {
 
 		String txt = "Plantações Cadastradas\n\n";
 		for (int i = 0; i < listaPlantacao.size(); i++) {
-			if (i == 0) {
-				Plantacao plantacao = listaPlantacao.get(i);
-				txt += "Nome: " + plantacao.getDono();
-			}
+
+			Plantacao plantacao = listaPlantacao.get(i);
+			txt += "Nome: " + plantacao.getDono() + "\n";
+
 		}
 		return txt;
 	}
@@ -111,22 +121,23 @@ public class Controladora {
 	private void validaPlantacao(String plantacaoSelecionada) {
 		for (int i = 0; i < listaPlantacao.size(); i++) {
 			Plantacao plantacao = listaPlantacao.get(i);
-			
+
 			if (plantacao.getDono().equals(plantacaoSelecionada)) {
 				int posicaoPlantacao = i;
 				int opcoesMenu = viewMenus.navegacaoPlantacoes();
-				
+
 				navegarPlantacaoAteQue(opcoesMenu, plantacao, posicaoPlantacao);
 			}
 		}
 	}
 
 	private static String listaProducao() {
-		String txt = "Lista Producao \n\n";
+		String txt = "\n\nLista Producao \n\n";
+
 		for (int i = 0; i < listaProducao.size(); i++) {
 
 			Producao producao = listaProducao.get(i);
-			txt += (i + 1);
+			txt += (i + 1) + "º \n";
 			txt += "Qtd Colhida: " + producao.getCaixasColhidas() + "\n";
 			txt += "Data Venda: " + producao.getDataVenda() + "\n";
 			txt += "Valor Recebido: " + producao.getValorRecebido() + "\n\n";
@@ -134,7 +145,7 @@ public class Controladora {
 
 		return txt;
 	}
-	
+
 	public void navegarPlantacaoAteQue(int opcoesMenu, Plantacao plantacao, int posicaoPlantacao) {
 		boolean validaMenu = false;
 
@@ -145,26 +156,15 @@ public class Controladora {
 				Controladora.movimentarProducao(viewMenus.movimentarProducao(), plantacao, posicaoPlantacao);
 				break;
 
-			case 1: // Movimentar Insumos
-				movimentarInsumos(viewMenus.movimentarInsumos(), plantacao);
-				
-				break;
-
-			case 2: // Aplicar Venda
-				String txt = aplicarVenda(viewMenus.SolicitaProducaoAplicarVenda());
-				JOptionPane.showMessageDialog(null, txt); 
+			case 2:
+				validaMenu = true;
+				encerraPrograma();
 				break;
 			}
 		} while (validaMenu != true);
 	}
 
-	private String aplicarVenda(String solicitaProducaoAplicarVenda) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void movimentarInsumos(Object movimentarInsumos, Plantacao plantacao) {
-		// TODO Auto-generated method stub
-		
+	private static void encerraPrograma() {
+		geralView.encerraPrograma();
 	}
 }

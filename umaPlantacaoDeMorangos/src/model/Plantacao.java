@@ -3,24 +3,22 @@ package model;
 public class Plantacao {
 	
 	String endereco;
-	String metrosQuadrados;
 	String dono;
+	String metrosQuadrados;
 	String dataDeCadastro;
-	Object Insumos;
 	Object Producao;
 	
 	
-	
-	public Object getInsumos() {
-		return Insumos;
+	public String getDono() {
+		return dono;
 	}
-	public void setInsumos(Object insumos) {
-		Insumos = insumos;
+	public void setDono(String dono) {
+		this.dono = dono;
 	}
 	public Object getProducao() {
 		return Producao;
 	}
-	public void setProducao(Object producao) {
+	public void setListaProducao(Object producao) {
 		Producao = producao;
 	}
 	public String getEndereco() {
@@ -34,12 +32,6 @@ public class Plantacao {
 	}
 	public void setMetrosQuadrados(String metrosQuadrados) {
 		this.metrosQuadrados = metrosQuadrados;
-	}
-	public String getDono() {
-		return dono;
-	}
-	public void setDono(String dono) {
-		this.dono = dono;
 	}
 	public String getDataDeCadastro() {
 		return dataDeCadastro;
