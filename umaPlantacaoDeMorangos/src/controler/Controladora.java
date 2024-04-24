@@ -48,8 +48,8 @@ public class Controladora {
 		} while (validaMenu != true);
 	}
 
-	public static void movimentarProducao(int opcoesMenu, Plantacao plantacao, int posicaoPlantacao) {
-
+	public static boolean movimentarProducao(int opcoesMenu, Plantacao plantacao, int posicaoPlantacao) {
+		boolean validaMenu = false;
 		switch (opcoesMenu) {
 
 		case 0: // Adicionar Produção
@@ -84,10 +84,16 @@ public class Controladora {
 			break;
 			
 		case 4:
+			validaMenu = true;
+			break;
+			
+		case 5:
+			validaMenu = true;
 			encerraPrograma();
 			break;
 
 		}
+		return validaMenu;
 	}
 
 	private static void removerProducao(int producaoRemover, int posicaoPlantacao) {
@@ -158,10 +164,13 @@ public class Controladora {
 			switch (opcoesMenu) {
 
 			case 0: // Movimentar Produção
-				Controladora.movimentarProducao(viewMenus.movimentarProducao(), plantacao, posicaoPlantacao);
+				validaMenu = Controladora.movimentarProducao(viewMenus.movimentarProducao(), plantacao, posicaoPlantacao);
 				break;
 
 			case 1:
+				validaMenu = true;
+				break;
+			case 2:
 				validaMenu = true;
 				encerraPrograma();
 				break;
