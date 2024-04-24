@@ -79,6 +79,11 @@ public class Controladora {
 			break;
 
 		case 3:
+			exibeTexto = listaProducao();
+			geralView.apresenta(exibeTexto);
+			break;
+			
+		case 4:
 			encerraPrograma();
 			break;
 
@@ -156,7 +161,7 @@ public class Controladora {
 				Controladora.movimentarProducao(viewMenus.movimentarProducao(), plantacao, posicaoPlantacao);
 				break;
 
-			case 2:
+			case 1:
 				validaMenu = true;
 				encerraPrograma();
 				break;

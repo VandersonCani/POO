@@ -23,7 +23,7 @@ public class viewMenus {
 	}
 
 	public static int movimentarProducao() {
-		String opcoes[] = { "Adicionar Produção", "Atualizar Produção", "Remover Produção", "Encerrar Programa" };
+		String opcoes[] = { "Adicionar Produção", "Atualizar Produção", "Remover Produção", "Listar Produção", "Encerrar Programa" };
 		
 		JComboBox<String> menu = new JComboBox<String>(opcoes);
 		JOptionPane.showConfirmDialog(null, menu, "Escolha o que deseja Atualizar", JOptionPane.OK_CANCEL_OPTION);
